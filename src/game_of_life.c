@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <ncurses.h>
 
 #define HEIGHT 25
 #define WIDTH 80
@@ -38,6 +37,7 @@ void init_board(int ac, char *av[]) {
         FILE *fptr;
         fptr=fopen (av[ac-1],"r");
         fscanf(fptr,"%d",&data[i][j]);
+        
     }
     }
 }
@@ -47,9 +47,8 @@ void init_board(int ac, char *av[]) {
 
 void print(int (*board)[WIDTH]) {
   system("clear");
-  int i, j;
-  for(i = 0; i < HEIGHT; i++) {
-    for(j = 0; j < WIDTH; j++) {
+  for(int i = 0; i < HEIGHT; i++) {
+    for(int j = 0; j < WIDTH; j++) {
       printf("%c", board[i][j] ? '*' : '.');
     }
     printf("\n");
