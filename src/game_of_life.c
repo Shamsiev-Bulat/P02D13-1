@@ -103,3 +103,4 @@ void update_board(int (*board)[WIDTH]) {
   }
 }
 
+
