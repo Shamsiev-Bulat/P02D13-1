@@ -5,7 +5,7 @@
 #define HEIGHT 25
 #define WIDTH 80
 
-void init_board(int ac, char *av[]);
+void init_board(int (*data)[WIDTH]);
 void print(int (*board)[WIDTH]);
 int count_neighbors(int i, int j, int (*board)[WIDTH]);
 void update_board(int (*board)[WIDTH]) ;
@@ -13,16 +13,18 @@ void update_board(int (*board)[WIDTH]) ;
 
 
 
-int main(int ac, char *av[]) {
-  init_board(ac,av);
+int main() {
     int board[HEIGHT][WIDTH];
-    int n;
-    scanf("%d", &n);
-  while(1) {
-    print(board);
-    update_board(board);
-          usleep(n);
-  }
+    init_board(board);
+    FILE *drugoe=freopen("/dev/tty","r",stdin);
+    if(drugoe==NULL) printf("Fatal");
+ int n;
+  scanf("%d", &n);
+ while(1) {
+   print(board);
+   update_board(board);
+        usleep(n);
+ }
 
   return 0;
 }
@@ -30,14 +32,14 @@ int main(int ac, char *av[]) {
 
 
 
-void init_board(int ac, char *av[]) {
-    int data[HEIGHT][WIDTH];
+void init_board(int (*data)[WIDTH]) {
+    char ch;
     for(int i = 0; i < HEIGHT; i++) {
     for(int j = 0; j < WIDTH; j++) {
-        FILE *fptr;
-        fptr=fopen (av[ac-1],"r");
-        fscanf(fptr,"%d",&data[i][j]);
-        
+        scanf("%c",&ch);
+        if(ch=='*') data[i][j]=1;
+        else if(ch=='.') data[i][j]=0;
+        else --j;
     }
     }
 }
@@ -49,7 +51,7 @@ void print(int (*board)[WIDTH]) {
   system("clear");
   for(int i = 0; i < HEIGHT; i++) {
     for(int j = 0; j < WIDTH; j++) {
-      printf("%c", board[i][j] ? '*' : '.');
+      printf("%c", board[i][j] == 1 ? '*' : ' ');
     }
     printf("\n");
   }
@@ -69,6 +71,13 @@ int count_neighbors(int i, int j, int (*board)[WIDTH]) {
       int neighbor_y = j + y;
       if(neighbor_x >= 0 && neighbor_x < HEIGHT && neighbor_y >= 0 && neighbor_y < WIDTH) {
         count += board[neighbor_x][neighbor_y];
+      }
+      else{
+          if(neighbor_x==HEIGHT) neighbor_x=0;
+          if(neighbor_x==-1) neighbor_x=HEIGHT-1;
+          if(neighbor_y==WIDTH) neighbor_y=0;
+          if(neighbor_y==-1) neighbor_y=WIDTH-1;
+          count += board[neighbor_x][neighbor_y];
       }
     }
   }
@@ -102,5 +111,3 @@ void update_board(int (*board)[WIDTH]) {
     }
   }
 }
-
-
