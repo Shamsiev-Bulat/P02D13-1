@@ -6,14 +6,14 @@
 #define WIDTH 80
 
 
-void init_board(int *board);
-void print_board(int *board);
-int count_neighbors(int i, int j, int *board);
-void update_board(int *board);
+void init_board(int **board);
+void print_board(int **board);
+int count_neighbors(int i, int j, int **board);
+void update_board(int **board);
 
 
 int main() {
-  int board[HEIGHT][WIDTH];
+  int **board;
   init_board(board);
   while(1) {
     print_board(board);
@@ -26,7 +26,7 @@ int main() {
 
 
 
-void init_board(int *board) {
+void init_board(int **board) {
   int i, j;
   for(i = 0; i < HEIGHT; i++) {
     for(j = 0; j < WIDTH; j++) {
@@ -35,7 +35,7 @@ void init_board(int *board) {
   }
 }
 
-void print_board(int *board) {
+void print_board(int **board) {
   system("clear");
   int i, j;
   for(i = 0; i < HEIGHT; i++) {
@@ -46,7 +46,7 @@ void print_board(int *board) {
   }
 }
 
-int count_neighbors(int i, int j, int *board) {
+int count_neighbors(int i, int j, int **board) {
   int count = 0;
   int x, y;
 
@@ -63,13 +63,13 @@ int count_neighbors(int i, int j, int *board) {
   return count;
 }
 
-void update_board(int *board) {
+void update_board(int **board) {
   int new_board[HEIGHT][WIDTH];
   int i, j;
   for(i = 0; i < HEIGHT; i++) {
     for(j = 0; j < WIDTH; j++) {
       int state = board[i][j];
-      int neighbors = count_neighbors(i, j);
+      int neighbors = count_neighbors(i, j, board);
       if(state == 0 && neighbors == 3) {
         new_board[i][j] = 1;
       }
