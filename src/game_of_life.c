@@ -6,6 +6,30 @@
 #define HEIGHT 25
 #define WIDTH 80
 
+void init_board(int ac, char *av[]);
+void print(int (*board)[WIDTH]);
+int count_neighbors(int i, int j, int (*board)[WIDTH]);
+void update_board(int (*board)[WIDTH]) ;
+
+
+
+
+int main(int ac, char *av[]) {
+  init_board(ac,av);
+    int board[HEIGHT][WIDTH];
+    int n;
+    scanf("%d", &n);
+  while(1) {
+    print(board);
+    update_board(board);
+          usleep(n);
+  }
+
+  return 0;
+}
+
+
+
 
 void init_board(int ac, char *av[]) {
     int data[HEIGHT][WIDTH];
@@ -18,6 +42,9 @@ void init_board(int ac, char *av[]) {
     }
 }
 
+
+
+
 void print(int (*board)[WIDTH]) {
   system("clear");
   int i, j;
@@ -28,6 +55,9 @@ void print(int (*board)[WIDTH]) {
     printf("\n");
   }
 }
+
+
+
 
 int count_neighbors(int i, int j, int (*board)[WIDTH]) {
   int count = 0;
@@ -45,6 +75,9 @@ int count_neighbors(int i, int j, int (*board)[WIDTH]) {
   }
   return count;
 }
+
+
+
 
 void update_board(int (*board)[WIDTH]) {
   int new_board[HEIGHT][WIDTH];
@@ -71,16 +104,3 @@ void update_board(int (*board)[WIDTH]) {
   }
 }
 
-int main(int ac, char *av[]) {
-  init_board(ac,av);
-    int board[HEIGHT][WIDTH];
-    int n;
-    scanf("%d", &n);
-  while(1) {
-    print(board);
-    update_board(board);
-          usleep(n);
-  }
-
-  return 0;
-}
