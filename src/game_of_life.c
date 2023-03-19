@@ -11,6 +11,7 @@ int count_neighbors(int i, int j, int (*board)[WIDTH]);
 void update_board(int (*board)[WIDTH]) ;
 
 
+<<<<<<< HEAD
 
 
 int main() {
@@ -25,12 +26,29 @@ int main() {
    update_board(board);
         usleep(n);
  }
+=======
+void init_board(int **board);
+void print_board(int **board);
+int count_neighbors(int i, int j, int **board);
+void update_board(int **board);
+
+
+int main() {
+  int **board;
+  init_board(board);
+  while(1) {
+    print_board(board);
+    update_board(board);
+    usleep(200000);
+  }
+>>>>>>> Game_of_life_primtr
 
   return 0;
 }
 
 
 
+<<<<<<< HEAD
 
 void init_board(int (*data)[WIDTH]) {
     char ch;
@@ -41,13 +59,24 @@ void init_board(int (*data)[WIDTH]) {
         else if(ch=='.') data[i][j]=0;
         else --j;
     }
+=======
+void init_board(int **board) {
+  int i, j;
+  for(i = 0; i < HEIGHT; i++) {
+    for(j = 0; j < WIDTH; j++) {
+      board[i][j] = rand() % 2;
+>>>>>>> Game_of_life_primtr
     }
 }
 
+<<<<<<< HEAD
 
 
 
 void print(int (*board)[WIDTH]) {
+=======
+void print_board(int **board) {
+>>>>>>> Game_of_life_primtr
   system("clear");
   for(int i = 0; i < HEIGHT; i++) {
     for(int j = 0; j < WIDTH; j++) {
@@ -57,10 +86,14 @@ void print(int (*board)[WIDTH]) {
   }
 }
 
+<<<<<<< HEAD
 
 
 
 int count_neighbors(int i, int j, int (*board)[WIDTH]) {
+=======
+int count_neighbors(int i, int j, int **board) {
+>>>>>>> Game_of_life_primtr
   int count = 0;
   int x, y;
 
@@ -84,10 +117,14 @@ int count_neighbors(int i, int j, int (*board)[WIDTH]) {
   return count;
 }
 
+<<<<<<< HEAD
 
 
 
 void update_board(int (*board)[WIDTH]) {
+=======
+void update_board(int **board) {
+>>>>>>> Game_of_life_primtr
   int new_board[HEIGHT][WIDTH];
   int i, j;
   for(i = 0; i < HEIGHT; i++) {
